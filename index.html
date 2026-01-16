@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHEFRA — Elite Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --neon:#00ffe1;
+  --dark:#04060c;
+  --glass:rgba(255,255,255,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif}
+body{
+  background:radial-gradient(circle at top,#0b1e2d,#000);
+  color:#fff;
+  overflow-x:hidden;
+}
+canvas{position:fixed;inset:0;z-index:-1}
+
+/* ===== Utilities ===== */
+.container{max-width:1300px;margin:auto;padding:40px 20px}
+.center{text-align:center}
+.btn{
+  display:inline-block;
+  padding:15px 35px;
+  border-radius:60px;
+  border:2px solid var(--neon);
+  background:var(--neon);
+  color:#000;
+  font-weight:900;
+  text-decoration:none;
+  transition:.4s;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 35px var(--neon);
+}
+.outline{
+  background:transparent;
+  color:var(--neon);
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+}
+.hero-box{
+  background:var(--glass);
+  backdrop-filter:blur(22px);
+  border-radius:35px;
+  padding:70px;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 0 80px rgba(0,255,225,.2);
+}
+.hero h1{
+  font-size:clamp(34px,6vw,70px);
+  font-weight:900;
+}
+.hero h1 span{color:var(--neon)}
+.hero h2{
+  margin-top:15px;
+  font-size:28px;
+  font-weight:600;
+  color:var(--neon);
+  min-height:40px;
+}
+.hero p{
+  margin:30px 0;
+  font-size:20px;
+  line-height:1.9;
+  opacity:.9;
+}
+
+/* ===== Sections ===== */
+section{margin-top:140px}
+.title{
+  font-size:44px;
+  font-weight:900;
+  margin-bottom:70px;
+  text-align:center;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.card{
+  background:var(--glass);
+  border-radius:30px;
+  padding:35px;
+  border:1px solid rgba(255,255,255,.15);
+  transition:.5s;
+  transform:translateY(40px);
+  opacity:0;
+}
+.card.show{
+  transform:translateY(0);
+  opacity:1;
+}
+.card:hover{
+  box-shadow:0 0 50px rgba(0,255,225,.3);
+}
+.card h3{color:var(--neon);margin-bottom:15px}
+
+/* ===== CTA ===== */
+.cta{
+  background:linear-gradient(135deg,rgba(0,255,225,.25),rgba(0,0,0,.5));
+  border-radius:40px;
+  padding:80px 30px;
+  text-align:center;
+}
+.cta h2{font-size:48px;margin-bottom:25px}
+
+
+/* ===== Footer ===== */
+footer{
+  margin:90px 0 30px;
+  text-align:center;
+  opacity:.6;
+}
+/* ===== Responsive Fix ===== */
+@media (max-width: 768px){
+  .hero{
+    padding-top:40px;
+  }
+  .hero-box{
+    padding:40px 25px;
+    border-radius:25px;
+  }
+  .hero h1{
+    font-size:34px;
+  }
+  .hero h2{
+    font-size:20px;
+  }
+  .hero p{
+    font-size:16px;
+  }
+  .btn{
+    width:100%;
+    text-align:center;
+    margin-top:15px;
+  }
+  section{
+    margin-top:90px;
+  }
+  .title{
+    font-size:30px;
+    margin-bottom:40px;
+  }
+  .cta h2{
+    font-size:32px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-box">
+    <h1>أنا <span>SHEFRA</span></h1>
+    <h2 id="type"></h2>
+    <p>
+   مبرمج مواقع وألعاب 💻🎮  
+        بحوّل أفكارك لمواقع فخمة وتجارب تبهِر أي عميل.  
+        لو محتاج موقع ويب، لعبة، أو أي مشروع برمجي —  
+        **أنا الشخص الصح**.
+    
+    </p>
+    <a class="btn" href="https://wa.me/201091462051" target="_blank">
+      تواصل واتساب الآن
+    </a>
+    <a class="btn outline" href="#power">ليه أنا؟</a>
+  </div>
+</section>
+
+<!-- POWER -->
+<section id="power">
+  <h2 class="title">ليه تختار SHEFRA؟</h2>
+  <div class="grid">
+    <div class="card"><h3>⚡ سرعة + جودة</h3><p>كود نظيف، أداء عالي، وتسليم محترم.</p></div>
+    <div class="card"><h3>🎯 عقلية بيزنس</h3><p>مش تصميم وخلاص — هدفه يقنع العميل.</p></div>
+    <div class="card"><h3>🧠 حلول ذكية</h3><p>كل مشروع له استراتيجية.</p></div>
+    <div class="card"><h3>🔥 تميّز حقيقي</h3><p>مش قوالب… بصمة.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="cta">
+    <h2>جاهز نسيب بصمة؟</h2>
+    <p>خلّي مشروعك يتكلم عنك.</p>
+    <a class="btn" href="https://wa.me/201091462051" target="_blank">
+      📞 201091462051
+    </a>
+  </div>
+</section>
+
+<footer>
+  © SHEFRA — Elite Digital Craft ⚡
+</footer>
+
+</div>
+
+<script>
+/* ===== TYPEWRITER ===== */
+const texts=[
+ "Web Developer",
+ "Game Developer",
+ "Digital Architect",
+ "Your Next Advantage"
+];
+let i=0,j=0,del=false;
+const el=document.getElementById('type');
+function type(){
+  el.textContent=texts[i].slice(0,j);
+  if(!del && j++===texts[i].length+10)del=true;
+  if(del && j--===0){del=false;i=(i+1)%texts.length}
+  setTimeout(type,del?60:120);
+}
+type();
+
+/* ===== Scroll Reveal ===== */
+const cards=document.querySelectorAll('.card');
+const io=new IntersectionObserver(e=>{
+ e.forEach(x=>{
+  if(x.isIntersecting)x.target.classList.add('show');
+ })
+},{threshold:.2});
+cards.forEach(c=>io.observe(c));
+
+/* ===== Background Particles ===== */
+const canvas=document.getElementById('bg'),c=canvas.getContext('2d');
+let w,h,p=[];
+function rs(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+onresize=rs;rs();
+for(let i=0;i<140;i++)
+ p.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,
+ dx:(Math.random()-.5),dy:(Math.random()-.5)});
+(function a(){
+ c.clearRect(0,0,w,h);
+ p.forEach(o=>{
+  o.x+=o.dx;o.y+=o.dy;
+  if(o.x<0||o.x>w)o.dx*=-1;
+  if(o.y<0||o.y>h)o.dy*=-1;
+  c.beginPath();
+  c.arc(o.x,o.y,o.r,0,Math.PI*2);
+  c.fillStyle='rgba(0,255,225,.8)';
+  c.fill();
+ });
+ requestAnimationFrame(a);
+})();
+</script>
+
+</body>
+</html>
