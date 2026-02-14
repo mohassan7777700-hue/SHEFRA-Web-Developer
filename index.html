@@ -108,6 +108,43 @@ section{margin-top:140px}
 }
 .card h3{color:var(--neon);margin-bottom:15px}
 
+/* ===== Pricing / Packages ===== */
+.pricing-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+.package-card{
+  background:var(--glass);
+  border-radius:25px;
+  padding:25px;
+  border:1px solid rgba(255,255,255,.15);
+  text-align:center;
+  transition:.3s;
+}
+.package-card:hover{
+  box-shadow:0 0 50px rgba(0,255,225,.3);
+}
+.package-card h3{color:var(--neon);margin-bottom:10px}
+.package-card p{margin-bottom:15px;font-weight:600}
+.package-card ul{list-style:none;padding:0;margin-bottom:15px}
+.package-card li{margin:8px 0}
+.package-card .btn-wa{
+  display:inline-block;
+  padding:10px 25px;
+  border-radius:25px;
+  background:var(--neon);
+  color:#000;
+  font-weight:900;
+  cursor:pointer;
+  border:none;
+  transition:.3s;
+}
+.package-card .btn-wa:hover{
+  box-shadow:0 0 35px var(--neon);
+  transform:scale(1.05);
+}
+
 /* ===== CTA ===== */
 .cta{
   background:linear-gradient(135deg,rgba(0,255,225,.25),rgba(0,0,0,.5));
@@ -116,7 +153,6 @@ section{margin-top:140px}
   text-align:center;
 }
 .cta h2{font-size:48px;margin-bottom:25px}
-
 
 /* ===== Footer ===== */
 footer{
@@ -158,7 +194,6 @@ footer{
     font-size:32px;
   }
 }
-
 </style>
 </head>
 <body>
@@ -176,8 +211,7 @@ footer{
    مبرمج مواقع وألعاب 💻🎮  
         بحوّل أفكارك لمواقع فخمة وتجارب تبهِر أي عميل.  
         لو محتاج موقع ويب، لعبة، أو أي مشروع برمجي —  
-        **أنا الشخص الصح**.
-    
+        <strong>أنا الشخص الصح</strong>.
     </p>
     <a class="btn" href="https://wa.me/201091462051" target="_blank">
       تواصل واتساب الآن
@@ -194,6 +228,45 @@ footer{
     <div class="card"><h3>🎯 عقلية بيزنس</h3><p>مش تصميم وخلاص — هدفه يقنع العميل.</p></div>
     <div class="card"><h3>🧠 حلول ذكية</h3><p>كل مشروع له استراتيجية.</p></div>
     <div class="card"><h3>🔥 تميّز حقيقي</h3><p>مش قوالب… بصمة.</p></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <h2 class="title">الباقات</h2>
+  <div class="pricing-container">
+    <div class="package-card">
+      <h3>Basic</h3>
+      <p>$1500</p>
+      <ul>
+        <li>1-3 صفحات</li>
+        <li>تصميم متجاوب</li>
+        <li>SEO أساسي</li>
+      </ul>
+      <button class="btn-wa" onclick="orderPackage('Basic','$300')">اختر الباقة</button>
+    </div>
+    <div class="package-card">
+      <h3>Business</h3>
+      <p>$3200</p>
+      <ul>
+        <li>حتى 7 صفحات</li>
+        <li>تصميم مخصص</li>
+        <li>تحسين سرعة</li>
+        <li>Contact Forms</li>
+      </ul>
+      <button class="btn-wa" onclick="orderPackage('Business','$800')">اختر الباقة</button>
+    </div>
+    <div class="package-card">
+      <h3>Premium</h3>
+      <p>$4850+</p>
+      <ul>
+        <li>تصميم احترافي كامل</li>
+        <li>تحسين تحويل الزوار</li>
+        <li>دفع إلكتروني</li>
+        <li>دعم شهر</li>
+      </ul>
+      <button class="btn-wa" onclick="orderPackage('Premium','$1500+')">اختر الباقة</button>
+    </div>
   </div>
 </section>
 
@@ -241,27 +314,45 @@ const io=new IntersectionObserver(e=>{
 },{threshold:.2});
 cards.forEach(c=>io.observe(c));
 
-/* ===== Background Particles ===== */
+/* ===== Background Codes (0 و1) ===== */
 const canvas=document.getElementById('bg'),c=canvas.getContext('2d');
-let w,h,p=[];
+let w,h,chars=[];
 function rs(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
 onresize=rs;rs();
 for(let i=0;i<140;i++)
- p.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,
- dx:(Math.random()-.5),dy:(Math.random()-.5)});
-(function a(){
- c.clearRect(0,0,w,h);
- p.forEach(o=>{
-  o.x+=o.dx;o.y+=o.dy;
-  if(o.x<0||o.x>w)o.dx*=-1;
-  if(o.y<0||o.y>h)o.dy*=-1;
-  c.beginPath();
-  c.arc(o.x,o.y,o.r,0,Math.PI*2);
-  c.fillStyle='rgba(0,255,225,.8)';
-  c.fill();
+ chars.push({
+   x:Math.random()*w,
+   y:Math.random()*h,
+   r:Math.random()*12+8,
+   dx:(Math.random()-.5)*0.5,
+   dy:(Math.random()-.5)*0.5,
+   char: Math.random()<0.5?'0':'1'
  });
- requestAnimationFrame(a);
+
+(function animate(){
+  c.clearRect(0,0,w,h);
+  chars.forEach(o=>{
+    o.x+=o.dx; o.y+=o.dy;
+    if(o.x<0||o.x>w) o.dx*=-1;
+    if(o.y<0||o.y>h) o.dy*=-1;
+    o.char = Math.random()<0.5?'0':'1'; // تتغير كل إطار
+    c.font = o.r+'px monospace';
+    c.fillStyle='rgba(0,255,225,0.8)';
+    c.fillText(o.char,o.x,o.y);
+  });
+  requestAnimationFrame(animate);
 })();
+
+/* ===== WhatsApp Order ===== */
+function orderPackage(name, price){
+  let phone="201091462051";
+  let message="مرحباً SHEFRA 👋\n\n" +
+              "أرغب في طلب الباقة التالية:\n" +
+              "اسم الباقة: "+name+"\n" +
+              "السعر: "+price+"\n\n"+
+              "من فضلك تواصل معي لإكمال الاتفاق.";
+  window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(message),"_blank");
+}
 </script>
 
 </body>
